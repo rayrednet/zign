@@ -27,7 +27,10 @@ return [
     */
 
     'env' => env('APP_ENV', 'production'),
-
+    // REPLACE WITH VALUE RETRIEVED FROM HEADER
+    'zoom_client_id' => env('ZOOM_CLIENT_ID', ''),
+    'zoom_client_secret' => env('ZOOM_CLIENT_SECRET', ''),
+    
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

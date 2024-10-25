@@ -11,16 +11,19 @@ class OAuthController extends Controller
     {
         // Get the 'code' from Zoom's callback
         $authorizationCode = $request->query('code');
-
+        
         // Exchange the authorization code for an access token
         $client = new Client();
         $response = $client->post('https://zoom.us/oauth/token', [
+            'headers' => [
+                "Authorization" => "Basic " . base64_encode(config('app.zoom_client_id') . ":" . config('app.zoom_client_secret'))
+            ],
             'form_params' => [
                 'grant_type' => 'authorization_code',
                 'code' => $authorizationCode,
-                'redirect_uri' => 'http://zign.test/oauth/callback', // Ensure this matches Zoom settings
-                'client_id' => env('ZOOM_CLIENT_ID'), // Ensure these are correct
-                'client_secret' => env('ZOOM_CLIENT_SECRET'),
+                'redirect_uri' => 'https://g85gcr50wi.sharedwithexpose.com/oauth/callback', // Ensure this matches Zoom settings
+                'client_id' => config('app.zoom_client_id'), // Ensure these are correct
+                'client_secret' => config('app.zoom_client_secret'),
             ],
         ]);
 
